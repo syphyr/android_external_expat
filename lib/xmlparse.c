@@ -2567,9 +2567,6 @@ doContent(XML_Parser parser,
         int len;
         const char *rawName;
         TAG *tag = tagStack;
-        tagStack = tag->parent;
-        tag->parent = freeTagList;
-        freeTagList = tag;
         rawName = s + enc->minBytesPerChar*2;
         len = XmlNameLength(enc, rawName);
         if (len != tag->rawNameLength
@@ -2577,6 +2574,9 @@ doContent(XML_Parser parser,
           *eventPP = rawName;
           return XML_ERROR_TAG_MISMATCH;
         }
+        tagStack = tag->parent;
+        tag->parent = freeTagList;
+        freeTagList = tag;
         --tagLevel;
         if (endElementHandler) {
           const XML_Char *localPart;
