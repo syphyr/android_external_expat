@@ -1672,6 +1672,12 @@ XML_ParseBuffer(XML_Parser parser, int len, int isFinal)
 
   if (parser == NULL)
     return XML_STATUS_ERROR;
+
+  if (len < 0) {
+    errorCode = XML_ERROR_INVALID_ARGUMENT;
+    return XML_STATUS_ERROR;
+  }
+
   switch (ps_parsing) {
   case XML_SUSPENDED:
     errorCode = XML_ERROR_SUSPENDED;
