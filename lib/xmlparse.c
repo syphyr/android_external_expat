@@ -6694,7 +6694,7 @@ nextScaffoldPart(XML_Parser parser)
      * from -Wtype-limits on platforms where
      * sizeof(unsigned int) < sizeof(size_t), e.g. on x86_64. */
 #if UINT_MAX >= SIZE_MAX
-    if (parser->m_groupSize > ((size_t)(-1) / sizeof(int))) {
+    if (groupSize > ((size_t)(-1) / sizeof(int))) {
       return -1;
     }
 #endif
